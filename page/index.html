@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+			margin: 0;
+			height: 100vh;
+			background-color: #eee;
+		}
+		/* *{
+			border: 1px solid black;
+		} */
+    </style>
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body class="flex">
+    <!-- 侧边栏 -->
+    <div style="width: 250px; z-index: 2;" class="shadow white side">
+        <!-- 头像 -->
+        <div class="head-icon-name">
+            <button style="margin-right: 10px;" id="like" onclick="getAlike()">0</button>
+            <img src="../icon/icon.png" alt="head-icon" width="40px" height="40px">
+            <div style="margin-left: 10px;">Reico</div>
+        </div>
+        <!-- 导航栏 -->
+        <div class="flex1">
+            <div class="navigation flex">
+                <input type="text" id="log" class="littlelog" value="请输入今天要做的一件小事"
+                    onfocus="if (this.value == '请输入今天要做的一件小事') {this.value = '';};"
+                    onblur="if(this.value == '') {this.value = '请输入今天要做的一件小事';};">
+                <button class="confirm" id="cfmbutton" onclick="changecfm()">√</button>
+            </div>
+            <div class="navigation">导航</div>
+            <div class="navigation">导航</div>
+            <div class="navigation">导航</div>
+            <div class="navigation">导航</div>
+        </div>
+    </div>
+    <!-- 主区域 -->
+    <div class="flex1 flex column">
+        <!-- 头部栏 -->
+        <div style="height: 60px; z-index: 1;" class="shadow white"></div>
+        <!-- 内容区 -->
+        <div style="overflow: auto;" class="flex1 flex content">
+            <!-- 左区 -->
+            <div style="flex: 3;" class="flex column mg8">
+                <!-- 数据区 -->
+                <div class="flex datazone">
+                    <!-- 数据块 -->
+                    <div style="height: 100px;" class="flex1 shadow white mgr8 data"></div>
+                    <div style="height: 100px;" class="flex1 shadow white mgr8 data"></div>
+                    <div style="height: 100px;" class="flex1 shadow white mgr8 data"></div>
+                    <div style="height: 100px;" class="flex1 shadow white data"></div>
+                </div>
+                <!-- 列表区 -->
+                <div class="flex column">
+                    <!-- 列表项 -->
+                    <div style="height: 160px;" class="shadow white mgt8"></div>
+                    <div style="height: 160px;" class="shadow white mgt8"></div>
+                    <div style="height: 160px;" class="shadow white mgt8"></div>
+                    <div style="height: 160px;" class="shadow white mgt8"></div>
+                    <div style="height: 160px;" class="shadow white mgt8"></div>
+                    <div style="height: 160px;" class="shadow white mgt8"></div>
+                </div>
+            </div>
+            <!-- 右区 -->
+            <div class=" flex1 flex column mgr8 mgt8 rightzone">
+                <!-- 提示区 -->
+                <div style="height: 150px;" class="shadow white"></div>
+                <!-- 消息区 -->
+                <div style="height: 300px;" class="shadow white mgt8"></div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function getAlike() {
+            let liketag = window.document.getElementById("like");
+            let likenum = parseInt(liketag.innerText);
+            let likenew = likenum + 1;
+            liketag.innerText = likenew;
+        }
+        function changecfm() {
+            let log = window.document.getElementById("log");
+            let cfm = window.document.getElementById("cfmbutton");
+            if (cfm.innerText == "√") {
+                log.setAttribute("disabled", "disabled");
+                window.localStorage.setItem("had", log.value);
+                cfm.innerText = "X";
+            } else {
+                log.removeAttribute("disabled");
+                window.localStorage.removeItem;
+                cfm.innerText = "√";
+            }
+        }
+        let data = window.localStorage.getItem("had");
+        if (data) {
+            window.document.getElementById("log").value = data;
+            changecfm();
+        }
+    </script>
+</body>
+</html>
